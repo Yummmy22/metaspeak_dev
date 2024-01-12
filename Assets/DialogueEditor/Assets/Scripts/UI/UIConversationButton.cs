@@ -48,40 +48,40 @@ namespace DialogueEditor
             m_rect = GetComponent<RectTransform>();
         }
 
-        private void Update()
-        {
-            if (Hovering)
-            {
-                m_hoverT += Time.deltaTime;
-                float normalised = m_hoverT / 0.2f;
-                bool done = false;
-                if (normalised >= 1)
-                {
-                    normalised = 1;
-                    done = true;
-                }
-                Vector3 size = Vector3.one;
-                float ease = EaseOutQuart(normalised);
+        //private void Update()
+        //{
+        //    if (Hovering)
+        //    {
+        //        m_hoverT += Time.deltaTime;
+        //        float normalised = m_hoverT / 0.2f;
+        //        bool done = false;
+        //        if (normalised >= 1)
+        //        {
+        //            normalised = 1;
+        //            done = true;
+        //        }
+        //        Vector3 size = Vector3.one;
+        //        float ease = EaseOutQuart(normalised);
                 
 
-                switch (m_hoverState)
-                {
-                    case eHoverState.animatingOn:
-                        size = Vector3.Lerp(Vector3.one, BigSize, ease);
-                        break;
-                    case eHoverState.animatingOff:
-                        size = Vector3.Lerp(BigSize, Vector3.one, ease);
-                        break;
-                }
+        //        switch (m_hoverState)
+        //        {
+        //            case eHoverState.animatingOn:
+        //                size = Vector3.Lerp(Vector3.one, BigSize, ease);
+        //                break;
+        //            case eHoverState.animatingOff:
+        //                size = Vector3.Lerp(BigSize, Vector3.one, ease);
+        //                break;
+        //        }
 
-                m_rect.localScale = size;
+        //        m_rect.localScale = size;
 
-                if (done)
-                {
-                    m_hoverState = (m_hoverState == eHoverState.animatingOn) ? eHoverState.idleOn : eHoverState.idleOff;
-                }
-            }
-        }
+        //        if (done)
+        //        {
+        //            m_hoverState = (m_hoverState == eHoverState.animatingOn) ? eHoverState.idleOn : eHoverState.idleOff;
+        //        }
+        //    }
+        //}
 
 
 
