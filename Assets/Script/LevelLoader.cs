@@ -5,23 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    public Animator transition;
+    public Animator transitionAnimator;
 
-    public float transitionTime = 1f;
+    private bool isTransitioning = false;
 
-    // Update is called once per frame
-
-    public void LoadNextLevel()
+    public void LoadNextLevel(string sceneName)
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        isTransitioning = true;
+        StartCoroutine(LoadLevel(sceneName));
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevel(string sceneName)
     {
-        transition.SetTrigger("Start");
+        // Menjalankan animasi transisi
+        if (transitionAnimator != null)
+        {
+            transitionAnimator.SetTrigger("Start");
+        }
 
-        yield return new WaitForSeconds(transitionTime);
+        // Menunggu sampai animasi selesai
+        while (isTransitioning)
+        {
+            yield return null;
+        }
 
-        SceneManager.LoadScene(levelIndex);
+        // Memuat level baru berdasarkan nama scene
+        SceneManager.LoadScene(sceneName);
+    }
+
+    // Dipanggil oleh Animator sebagai event saat animasi selesai
+    public void OnTransitionComplete()
+    {
+        isTransitioning = false;
     }
 }
