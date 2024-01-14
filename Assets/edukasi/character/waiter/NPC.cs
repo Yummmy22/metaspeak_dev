@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DialogueEditor;
 using UnityEngine.Events;
-public class Cashier : MonoBehaviour
+public class NPC : MonoBehaviour
 {
 
     Collider m_collider;
 
-    [SerializeField] private NPCConversation myConversation;
+    [SerializeField] private NPCConversation conversation;
 
     public UnityEvent onConversationStart;
     public UnityEvent onConversationEnd;
@@ -26,7 +26,7 @@ public class Cashier : MonoBehaviour
     {
         // Invoke the start event and start the conversation
         onConversationStart.Invoke();
-        ConversationManager.Instance.StartConversation(myConversation);
+        ConversationManager.Instance.StartConversation(conversation);
         // Optional: You may want to unsubscribe and then resubscribe to ensure it's only called once per conversation
         ConversationManager.OnConversationEnded -= OnConversationEnded;
         ConversationManager.OnConversationEnded += OnConversationEnded;
