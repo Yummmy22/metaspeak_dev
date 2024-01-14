@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DialogueEditor;
 using UnityEngine.Events;
-public class Cashier : MonoBehaviour
+public class NPC : MonoBehaviour
 {
 
     Collider m_collider;
