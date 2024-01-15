@@ -7216,6 +7216,26 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3288661188981698784, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288661188981698784, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288661188981698784, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288661188981698784, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288661188981698784, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEditor.MonoScript, UnityEditor.CoreModule
+      objectReference: {fileID: 0}
     - target: {fileID: 3288661189240796570, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7226,7 +7246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3288661189240796570, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3288661189240796570, guid: cc2e115250cd64642970982fbf7dded2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -15160,8 +15180,8 @@ RectTransform:
   - {fileID: 1874427777}
   - {fileID: 1075406206}
   - {fileID: 1416183103}
-  - {fileID: 1293057596}
   - {fileID: 388824761}
+  - {fileID: 1293057596}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27369,7 +27389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2621287721684099154, guid: 3f7dbc6c1583bb94f9473d49de6cad26, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2621287721684099154, guid: 3f7dbc6c1583bb94f9473d49de6cad26, type: 3}
       propertyPath: m_AnchorMax.x

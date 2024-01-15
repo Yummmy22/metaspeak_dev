@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -7,9 +8,7 @@ public class VolumeSettings : MonoBehaviour
     public static AudioManager instance;
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider inGameMusicSlider;
     [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Slider inGameSfxSlider;
 
     private void Awake()
     {
@@ -18,7 +17,7 @@ public class VolumeSettings : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey("musicVolume") || PlayerPrefs.HasKey("sfxVolume"))
         {
             LoadVolume();
         }
@@ -26,49 +25,28 @@ public class VolumeSettings : MonoBehaviour
         {
             SetMusicVolume();
             SetSFXVolume();
-            SetInGameMusicVolume();
-            SetInGameSFXVolume();
         }
     }
 
     public void SetMusicVolume()
     {
-        float volume = musicSlider.value;
-        myMixer.SetFloat("music", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("musicVolume", volume);
+        PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
+        myMixer.SetFloat("music", MathF.Log10(PlayerPrefs.GetFloat("musicVolume")) * 20);
+        Debug.Log(PlayerPrefs.GetFloat("musicVolume"));
     }
 
     public void SetSFXVolume()
     {
-        float volume = sfxSlider.value;
-        myMixer.SetFloat("sfx", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("sfxVolume", volume);
-    }
-
-    public void SetInGameMusicVolume()
-    {
-        float volume = inGameMusicSlider.value;
-        myMixer.SetFloat("music", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("musicVolume", volume);
-    }
-
-    public void SetInGameSFXVolume()
-    {
-        float volume = inGameSfxSlider.value;
-        myMixer.SetFloat("sfx", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("sfxVolume", volume);
+        PlayerPrefs.SetFloat("sfxVolume", sfxSlider.value);
+        myMixer.SetFloat("sfx", MathF.Log10(PlayerPrefs.GetFloat("sfxVolume")) * 20);
     }
 
     private void LoadVolume()
     {
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        inGameMusicSlider.value = PlayerPrefs.GetFloat("musicVolume");
         sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
-        inGameSfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
 
         SetMusicVolume();
         SetSFXVolume();
-        SetInGameMusicVolume();
-        SetInGameSFXVolume();
     }
 }
