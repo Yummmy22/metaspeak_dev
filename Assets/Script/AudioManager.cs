@@ -1,68 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("Audio Source")]
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource SFXSource;
+    public static AudioManager instance;
 
-    [Header("Slider")]
-    [SerializeField] Slider volumeSlider;
-
-    [Header("Audio Clip")]
-    public AudioClip background;
-    public AudioClip win;
-
-    void Start()
-    {
-        if(!PlayerPrefs.HasKey("musicVolume"))
-        {
-            PlayerPrefs.SetFloat("musicVolume", 1);
-            Load();
-        }
-        else
-        {
-            Load();
-        }
-
-        musicSource.clip = background;
-        musicSource.Play();
-    }
+    public Sound[] musicSounds, sfxSounds;
+    public AudioSource musicSource, sfxSource;
 
     private void Awake()
     {
-        if (FindObjectsOfType<AudioManager>().Length > 1)
+        if (instance == null)
         {
-            Destroy(gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
         }
-
     }
 
-    public void ChangeVolume()
+    private void Start()
     {
-        AudioListener.volume = volumeSlider.value;
-        Save();
+        PlayMusic("Theme");
     }
 
-    private void Load()
+    public void PlayMusic(string name)
     {
-        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        Sound s = Array.Find(musicSounds, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("Sound not found");
+        }
+        else
+        {
+            musicSource.clip = s.clip;
+            musicSource.Play();
+        }
     }
 
-    private void Save()
+    public void PlaySFX(string name)
     {
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    }
+        Sound s = Array.Find(sfxSounds, x => x.name == name);
 
-    public void PlaySFX(AudioClip clip)
-    {
-        SFXSource.PlayOneShot(clip);
+        if (s != null)
+        {
+            Debug.Log("Sound not found");
+        }
+        else
+        {
+            sfxSource.PlayOneShot(s.clip);
+        }
     }
 }
