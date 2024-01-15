@@ -1640,10 +1640,10 @@ MonoBehaviour:
       - m_Target: {fileID: 3687151999025752470}
         m_TargetAssemblyTypeName: AudioHandler, Assembly-CSharp
         m_MethodName: changeSfxVolume
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3288661188981698784}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2291,8 +2291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945fe8c2c4fc6d84f9ead926ddc44969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 4352971970855440434}
-  sfxSlider: {fileID: 3288661188981698784}
 --- !u!1 &4352971969922544818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,17 +2573,17 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.228
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3687151999025752470}
         m_TargetAssemblyTypeName: AudioHandler, Assembly-CSharp
         m_MethodName: changeMusicVolume
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 4352971970855440434}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -9,6 +9,7 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
+    [SerializeField] private AudioHandler audioHandler;
 
     private void Awake()
     {
@@ -23,30 +24,31 @@ public class VolumeSettings : MonoBehaviour
         }
         else
         {
-            SetMusicVolume();
-            SetSFXVolume();
+            audioHandler.changeMusicVolume(musicSlider);
+            audioHandler.changeSfxVolume(sfxSlider);
         }
     }
 
-    public void SetMusicVolume()
+    public void SetMusicVolume(float sliderValue)
     {
-        PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
+        PlayerPrefs.SetFloat("musicVolume",sliderValue);
         myMixer.SetFloat("music", MathF.Log10(PlayerPrefs.GetFloat("musicVolume")) * 20);
         Debug.Log(PlayerPrefs.GetFloat("musicVolume"));
     }
 
-    public void SetSFXVolume()
+    public void SetSFXVolume(float sliderValue)
     {
-        PlayerPrefs.SetFloat("sfxVolume", sfxSlider.value);
+        PlayerPrefs.SetFloat("sfxVolume", sliderValue);
         myMixer.SetFloat("sfx", MathF.Log10(PlayerPrefs.GetFloat("sfxVolume")) * 20);
+        Debug.Log(PlayerPrefs.GetFloat("musicVolume"));
     }
 
     private void LoadVolume()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        //musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        //sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
 
-        SetMusicVolume();
-        SetSFXVolume();
+        audioHandler.changeMusicVolume(musicSlider);
+        audioHandler.changeSfxVolume(sfxSlider);
     }
 }
