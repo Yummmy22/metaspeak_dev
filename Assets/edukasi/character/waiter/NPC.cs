@@ -4,6 +4,7 @@ using UnityEngine;
 using DialogueEditor;
 using UnityEngine.Events;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class NPC : MonoBehaviour
 {
@@ -15,25 +16,32 @@ public class NPC : MonoBehaviour
     public UnityEvent onConversationStart;
     public UnityEvent onConversationEnd;
     public Material effectMaterial;
-    private Renderer rend;
+    private SkinnedMeshRenderer renderer;
 
-    private Material originalMaterial;
+    bool outlineAdded = false;
+    public Material originalMaterial;
 
     private void Start()
     {
         m_collider = GetComponent<Collider>();
-        rend = GetComponent<Renderer>();
-        originalMaterial = rend.sharedMaterial;
+        renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        originalMaterial = renderer.materials[0];
 
     }
 
     private void OnMouseOver()
     {
-        rend.sharedMaterial = effectMaterial;
+        if (!outlineAdded)
+        {
+            addOutline();
+        }
     }
     private void OnMouseExit()
     {
-        rend.sharedMaterial = originalMaterial;
+        if (outlineAdded)
+        {
+            removeOutline();
+        }
     }
 
     private void OnMouseDown()
@@ -45,7 +53,7 @@ public class NPC : MonoBehaviour
         ConversationManager.OnConversationEnded -= OnConversationEnded;
         ConversationManager.OnConversationEnded += OnConversationEnded;
         m_collider.enabled = false;
-        rend.material = originalMaterial;
+        
     }
 
     private void OnConversationEnded()
@@ -54,5 +62,22 @@ public class NPC : MonoBehaviour
         onConversationEnd.Invoke();
         // Unsubscribe from the event
         ConversationManager.OnConversationEnded -= OnConversationEnded;
+    }
+
+    public void addOutline()
+    {
+        Material[] materialsArray = new Material[renderer.materials.Length + 1];
+        renderer.materials.CopyTo(materialsArray, 0);
+        materialsArray[materialsArray.Length - 1] = effectMaterial;
+        renderer.materials = materialsArray;
+        outlineAdded = true;
+    }
+
+    public void removeOutline()
+    {
+        Material[] materialsArray = new Material[renderer.materials.Length - 1];
+        materialsArray[0] = originalMaterial;
+        renderer.materials = materialsArray;
+        outlineAdded = false;
     }
 }
