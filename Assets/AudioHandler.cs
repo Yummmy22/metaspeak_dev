@@ -12,17 +12,14 @@ public class AudioHandler : MonoBehaviour
 
     public void changeMusicVolume(Slider slider)
     {
-        print("value changing");
         PlayerPrefs.SetFloat("musicVolume", slider.value);
         audioManager.SetMusicVolume(slider.value);
-        print("value changed");
     }
     
     public void changeSfxVolume(Slider slider)
     {
         PlayerPrefs.SetFloat("sfxVolume",slider.value);
         audioManager.SetSFXVolume(slider.value);
-        print("value changed");
     }
 
     void Start()
