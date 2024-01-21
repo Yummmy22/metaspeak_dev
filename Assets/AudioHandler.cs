@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class AudioHandler : MonoBehaviour
 {
     private VolumeSettings audioManager;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+
     public void changeMusicVolume(Slider slider)
     {
         print("value changing");
@@ -25,6 +28,7 @@ public class AudioHandler : MonoBehaviour
     void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<VolumeSettings>();
-        
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
     }
 }

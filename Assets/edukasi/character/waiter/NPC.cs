@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DialogueEditor;
 using UnityEngine.Events;
+using Unity.VisualScripting;
+
 public class NPC : MonoBehaviour
 {
 
@@ -12,16 +14,28 @@ public class NPC : MonoBehaviour
 
     public UnityEvent onConversationStart;
     public UnityEvent onConversationEnd;
+    public Material effectMaterial;
+    private Renderer rend;
+
+    private Material originalMaterial;
 
     private void Start()
     {
         m_collider = GetComponent<Collider>();
+        rend = GetComponent<Renderer>();
+        originalMaterial = rend.sharedMaterial;
+
     }
 
     private void OnMouseOver()
     {
-        // hoverring
+        rend.sharedMaterial = effectMaterial;
     }
+    private void OnMouseExit()
+    {
+        rend.sharedMaterial = originalMaterial;
+    }
+
     private void OnMouseDown()
     {
         // Invoke the start event and start the conversation
@@ -31,7 +45,7 @@ public class NPC : MonoBehaviour
         ConversationManager.OnConversationEnded -= OnConversationEnded;
         ConversationManager.OnConversationEnded += OnConversationEnded;
         m_collider.enabled = false;
-
+        rend.material = originalMaterial;
     }
 
     private void OnConversationEnded()

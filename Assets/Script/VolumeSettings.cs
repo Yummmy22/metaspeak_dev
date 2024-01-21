@@ -45,10 +45,8 @@ public class VolumeSettings : MonoBehaviour
 
     private void LoadVolume()
     {
-        //musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        //sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
 
-        audioHandler.changeMusicVolume(musicSlider);
-        audioHandler.changeSfxVolume(sfxSlider);
     }
 }
