@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
     public bool isPaused;
+    public CinemachineBrain cinemachineBrain;
 
     [Header("Pause Menu Settings")]
     // Menambahkan referensi untuk animasi pada game object
@@ -41,6 +43,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
 
+        if (cinemachineBrain != null)
+        {
+            cinemachineBrain.enabled = false;
+        }
+
         // Menyetel trigger untuk memulai animasi pada menu
         if (menuAnimator != null)
         {
@@ -52,12 +59,18 @@ public class PauseMenu : MonoBehaviour
         {
             ButtonAnimator.SetTrigger(pauseButtonAnimationTrigger);
         }
+
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         isPaused = false;
+
+        if (cinemachineBrain != null)
+        {
+            cinemachineBrain.enabled = true;
+        }
 
         // Menyetel trigger untuk memulai animasi pada menu saat resume
         if (menuAnimator != null)
