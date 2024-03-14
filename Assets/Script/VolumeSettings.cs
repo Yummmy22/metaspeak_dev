@@ -45,6 +45,5 @@ public class VolumeSettings : MonoBehaviour
     {
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
         sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
-
     }
 }
